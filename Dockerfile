@@ -36,6 +36,8 @@ ENV LD_LIBRARY_PATH=/usr/local/lib
 RUN apt-get update && \
     apt-get install -y --no-install-recommends --no-install-suggests \
     libcurl4 libncurses5 libxmlrpc-c++8v5 ca-certificates && \
+    ln -sf /dev/stdout /var/log/rtorrent.log && \
+    ln -sf /dev/stderr /var/log/rtorrent.log && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /usr/local /usr/local
