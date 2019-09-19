@@ -26,16 +26,15 @@ RUN apt-get update && \
     make && \
     make install-strip
 
-FROM debian:10-slim
+FROM alpine:3.10
 LABEL maintainer="serhiy@makarenko.me"
 
-ARG DEBIAN_FRONTEND=noninteractive
+#ARG DEBIAN_FRONTEND=noninteractive
 
 ENV LD_LIBRARY_PATH=/usr/local/lib
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends --no-install-suggests \
-    libcurl4 libncurses5 libxmlrpc-c++8v5 ca-certificates && \
+RUN apk add \
+    curl-dev ncurses-dev xmlrpc-c ca-certificates && \
     ln -sf /dev/stdout /var/log/rtorrent.log && \
     ln -sf /dev/stderr /var/log/rtorrent.log && \
     rm -rf /var/lib/apt/lists/*
