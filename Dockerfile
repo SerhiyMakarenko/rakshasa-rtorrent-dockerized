@@ -24,7 +24,7 @@ RUN apt-get update && \
     cd rtorrent-${RTORRENT_VERSION} && \
     ./configure \
         --with-xmlrpc-c && \
-    make && \
+    make -j3 && \
     make install-strip
 
 FROM debian:10-slim
